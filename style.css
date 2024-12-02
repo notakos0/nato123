@@ -1,0 +1,290 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {overflow-x: hidden;}
+
+h1 { font-size: 3rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+
+/* Betöltési képernyő */
+.glow-text {
+    text-shadow: 0 0 20px #ffffff;
+}
+.loading-text {
+    text-align: center;
+    color: white;
+}
+
+.fade {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
+}
+
+.fade.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Kezdő rész */
+.start {
+    height: 50vh;
+    padding-top: 10vh;
+    text-align: center;
+    background-image: url('main-bg.png');
+    background-size: cover;
+    background-position: center center;
+    padding-inline: 300px;
+    position: relative;
+    z-index: -1;
+}
+
+.start::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.63);
+}
+
+.start h1 {
+    position: relative;
+    color: white;
+    z-index: 1;
+    font-size: 7rem;
+}
+
+.start h2 {
+    position: relative;
+    color: white;
+    z-index: 1;
+    font-size: 2.5rem;
+}
+
+.title {
+    font-size: 48px;
+    font-weight: bold;
+    color: #fff; /* Fehér színű alap szöveg */
+    text-align: center;
+    text-shadow: 
+        0 0 5px #fff,    /* Fehér fényglow */
+        0 0 10px #fff,   /* Erősebb fehér fényglow */
+        0 0 20px #ff00ff, /* Lila glow */
+        0 0 30px #ff00ff, /* Erősebb lila glow */
+        0 0 40px #ff00ff, /* Nagyon erős lila glow */
+        0 0 50px #ff00ff, /* Maximális lila glow */
+        0 0 75px #ff00ff;
+}
+
+
+/* Alap animációk, amit már megadtál */
+.slideload {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.slideload.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Jobbról érkező animáció */
+.rightslide {
+    transform: translateX(100px); /* Kezdetben jobbra csúsztatott helyzet */
+    opacity: 0;
+    transition: opacity 0.8s ease, transform 0.8s ease; /* Biztosítja, hogy a transition simán működjön */
+}
+
+.rightslide.active {
+    opacity: 1;
+    transform: translateX(0); /* A végső pozíció */
+}
+
+/* Balról érkező animáció */
+.leftslide {
+    transform: translateX(-100px); /* Kezdetben balra csúsztatott helyzet */
+    opacity: 0;
+    transition: opacity 0.8s ease, transform 0.8s ease; /* Ugyanúgy biztosítja a sima animációt */
+}
+
+.leftslide.active {
+    opacity: 1;
+    transform: translateX(0); /* A végső pozíció */
+}
+
+
+/* Kártyák szekció */
+.cards {
+    background-color: black;
+    color: white;
+    box-shadow: 0 -100px 1000px 200px black;
+    height: 6000px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 600px; /* Távolság a kártyák között */
+}
+
+.card-con {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; /* A relatív pozíció miatt az abszolút pozíció működik a gyerekeknél */
+}
+
+.card-cover,
+.card {
+    position: absolute;
+    height: 200px;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    border: 10px solid;
+    border-radius: 20px;
+    transition: all 0.5s ease; /* Animációs hatás */
+}
+
+/* Card cover stílusok */
+.card-cover {
+    background-color: rgb(36, 36, 36);
+    border: 2px black solid;
+    z-index: 2; /* A cover legyen a card felett */
+    transform: translateX(0); /* Kezdőpozíció: középen */
+    box-shadow: 0 0 40px 10px rgb(0, 140, 255);
+    padding: 25px;
+}
+
+.card-cover:hover {
+    background-color: rgb(26, 26, 26)
+}
+
+/* Card stílusok */
+.card {
+    background-color: rgb(58, 58, 58);
+    z-index: 1; /* A card legyen a cover alatt */
+    transform: translateX(0); /* Kezdőpozíció: középen */
+    box-shadow: 0 0 40px 10px rgb(25, 64, 6);
+    border: 2px black solid;
+    padding: 25px;
+}
+
+/* Aktív állapotok (kattintás után) */
+.card-con.clicked .card-cover {
+    transform: translateX(-60%); /* Card cover balra csúszik */
+}
+
+.card-con.clicked .card {
+    transform: translateX(60%); /* Card jobbra csúszik */
+}
+
+.op-text {
+    opacity: 0.7;
+    font-size: 1rem;
+}
+
+
+/* Timeline konténer */
+.timeline {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding-top: 30px; /* Adjunk egy kis helyet a vonal tetejéhez */
+    padding-bottom: 30px; /* Adjunk egy kis helyet az aljához is */
+    background-color: black;
+}
+
+/* Timeline vonal */
+.timeline-container {
+    position: relative;
+    width: 5px;
+    background-color: #3498db;
+    margin-left: 20px;
+    height: 80%; /* A vonal teljes magassága */
+    box-shadow: 0 0px 10px 5px #3498db;
+}
+
+/* Timeline itemek */
+.timeline-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    position: relative;
+    padding-left: 40px; /* Hely a szöveg és a kör között */
+    width: 200px;
+}
+
+.timeline-circle {
+    width: 20px;
+    height: 20px;
+    background-color: #3498db;
+    border-radius: 50%;
+    margin-right: 15px;
+    position: absolute;
+    left: -40px; /* Balra tolja a kört */
+    box-shadow: 0 0px 10px 5px #3498db;
+}
+
+.timeline-text {
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    color: white;
+    text-align: left;
+}
+
+.t-title {
+    background-color: black;
+    text-align: center;
+    color: white;
+}
+
+.big-text {
+    padding-block: 200px;
+    padding-inline: 300px;
+    background-color: black;
+    color: white;
+}
+
+
+.footer {
+    background-color: black;
+    text-align: center;
+    color: white;
+    border-top: 5px solid #3498db;
+    padding: 20px;
+}
+
+/* Mobiilra optimalizált verzió */
+@media screen and (max-width: 600px) {
+    .timeline-container {
+        width: 3px;
+    }
+    .timeline-circle {
+        width: 15px;
+        height: 15px;
+    }
+    .timeline-text {
+        font-size: 12px;
+    }
+}

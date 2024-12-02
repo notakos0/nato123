@@ -1,0 +1,125 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    /*cursor: url('cursor.png'), auto;*/
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    background-color: black;
+}
+
+h1 { font-size: 3rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+
+.glow-text {
+    text-shadow: 0 0 20px #ffffff;
+}
+
+.loading-text {
+    text-align: center;
+}
+
+button {
+    width: 300px;
+    height: 50px;
+    font-size: 1rem;
+    background-color: rgba(0, 0, 0, 0.397);
+    border: 2px solid black;
+    border-radius: 10px;
+    transition:all ease 0.3s;
+}
+
+button:hover {
+    background-color: rgba(0, 0, 0, 0.712);
+    border: 4px solid black;
+}
+
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('bg.png');
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+}
+
+.center {
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.062);
+    width: 500px;
+    height: 500px;
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 50px;
+    backdrop-filter: blur(10px);
+    z-index: 1;
+    box-shadow: 0 0 20px 5px rgb(0, 0, 0);
+}
+
+.description {
+    text-align: left;
+}
+
+/* Fade effekt */
+.fade {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1s ease-in-out;
+    z-index: 10;
+}
+
+.fade.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.slideload {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.slideload.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+@media screen and (max-width: 600px) {
+    .center {
+        width: 300px;
+        height: fit-content;
+    }
+
+    button {
+        width: 200px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .center {
+        width: 200px;
+    }
+}
